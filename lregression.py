@@ -6,6 +6,7 @@ from sklearn.linear_model import LinearRegression
 import datetime
 import matplotlib.pyplot as plt
 from matplotlib import style
+import pickle
 
 api_k = "VKApkPmDCQfgmTvuE_xy"
 df = Quandl.get('WIKI/GOOGL', api_key = api_k)
@@ -21,7 +22,7 @@ df.fillna('-99999', inplace = True)
 forecast_out = int(math.ceil(0.01 * len(df)))
 
 df['label'] = df[forecast_col].shift(-forecast_out)
-#print(forecast_out)
+print(df.head())
 
 X = np.array(df.drop(['label'],1))
 X = preprocessing.scale(X)
@@ -31,11 +32,18 @@ X_lately = X[-forecast_out:]
 
 df.dropna(inplace = True)
 y = np.array(df['label'])
-y = np.array(df['label'])
 
 X_train, X_test, y_train, y_test = model_selection.train_test_split(X,y, test_size = 0.2)
-clf = LinearRegression()
-clf.fit(X_train,y_train)
+
+#clf = LinearRegression(n_jobs =-1 )
+#clf.fit(X_train,y_train)
+#with open('linearregression.pickle','wb') as f:
+#    pickle.dump(clf,f)
+
+pickle_in = open('linearregression.pickle' , 'rb')
+clf = pickle.load(pickle_in)
+
+
 accuracy = clf.score(X_test,y_test)
 print(accuracy)
 

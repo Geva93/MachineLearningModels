@@ -1,4 +1,4 @@
 # MachineLearningModels
 Building Machine learning models from scratch
 Step 1:
-Install Quandl, Panda, numpy , learn
+train LinearRegression and svm.SVR model on stock price

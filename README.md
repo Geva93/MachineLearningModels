@@ -5,3 +5,4 @@ train LinearRegression and svm.SVR model on stock price
 #Build a classifier and test
 #Pickle
 # build linear regression from scratch
+# R^2 theory to reach better fit

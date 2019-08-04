@@ -19,7 +19,7 @@ dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
 secret_key = os.getenv('SECRET_KEY')
 
-df = Quandl.get('WIKI/GOOGL', api_key = "VKApkPmDCQfgmTvuE_xy")
+df = Quandl.get('WIKI/GOOGL', api_key = secret_key)
 
 df = df[['Adj. Open','Adj. High','Adj. Low','Adj. Close','Adj. Volume']]
 df['HL_PCT'] = (df['Adj. High'] - df['Adj. Close']) / df['Adj. Close'] * 100.0

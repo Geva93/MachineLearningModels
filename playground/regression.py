@@ -19,25 +19,26 @@ dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
 secret_key = os.getenv('SECRET_KEY')
 
-df = Quandl.get('WIKI/GOOGL', api_key = secret_key)
+df = Quandl.get('WIKI/GOOGL', api_key = "VKApkPmDCQfgmTvuE_xy")
 
 df = df[['Adj. Open','Adj. High','Adj. Low','Adj. Close','Adj. Volume']]
 df['HL_PCT'] = (df['Adj. High'] - df['Adj. Close']) / df['Adj. Close'] * 100.0
 df['PCT_change'] = (df['Adj. Close'] - df['Adj. Open']) / df['Adj. Open'] * 100.0
 
+#          price         x            x              x
 df = df[['Adj. Close', 'HL_PCT', 'PCT_change', 'Adj. Volume']]
 
 forecast_col = 'Adj. Close'
 df.fillna(-99999, inplace = True) #Fill Non available fields, in ML don't work with NaN values. Now it will be an outlier in the set.
 
-forecast_out = int(math.ceil(0.01*len(df))) # round up to the nearst whole
+forecast_out = int(math.ceil(0.1*len(df))) # round up to the nearst whole
 df['label'] = df[forecast_col].shift(-forecast_out)
 
 x = np.array(df.drop(['label'], 1))
 
 x = preprocessing.scale(x) #normalize the data before fit
-x = x[:-forecast_out]
 x_lately = x[-forecast_out:]
+x = x[:-forecast_out]
 
 df.dropna(inplace=True)
 y = np.array(df['label'])
@@ -71,4 +72,4 @@ df['Forecast'].plot()
 plt.legend(loc = 4)
 plt.xlabel('Date')
 plt.ylabel('Price')
-#plt.show()
+plt.show()

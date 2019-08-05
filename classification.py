@@ -1,19 +1,34 @@
+from math import sqrt
 import numpy as np
-from sklearn import preprocessing, neighbors
-from sklearn.model_selection import train_test_split
-import pandas as pd
+import matplotlib.pyplot as plt
+from matplotlib import style
+from collections import Counter
+import warnings
+style.use('fivethirtyeight')
 
-df = pd.read_csv('breast-cancer-wisconsin.data')
-df.replace('?', -99999, inplace = True)
-df.drop(['id'], 1, inplace = True)
+dataset = {'k': [[1,2],[2,3],[3,1]],'r':[[6,5],[7,7],[8,6]]}
+new_features = [5,7]
 
-x = np.array(df.drop(['class'],1))
-y = np.array(df['class'])
+#[[plt.scatter(ii[0], ii[1], s = 100,color = i) for ii in dataset[i]] for i in dataset]
+#plt.scatter(new_features[0],new_features[1], s = 100)
+#plt.show()
 
-x_train, x_test, y_train, y_test = train_test_split(x,y, test_size = 0.2)
+def k_nearest_neighbors(data,predict,k = 3):
+    if len(data) >= k:
+        warnings.warn('K is set to a value less than total voting groups!')
+    distances = []
+    for group in data:
+        for features in data[group]:
+            euclidean_distance = np.linalg.norm(np.array(features) - np.array(predict))
+            distances.append([euclidean_distance, group])
+    votes = [i[1] for i in sorted(distances) [:k]]
+    vote_result = Counter(votes).most_common(1)[0][0]
+    return vote_result
 
-clf = neighbors.KNeighborsClassifier()
-clf.fit(x_train,y_train)
 
-accuracy = clf.score(x_test,y_test)
-print(accuracy)
+result = k_nearest_neighbors(dataset, new_features,k =3)
+print(result)
+
+[[plt.scatter(ii[0], ii[1], s = 100,color = i) for ii in dataset[i]] for i in dataset]
+plt.scatter(new_features[0],new_features[1], s = 50, color = result)
+plt.show()

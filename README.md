@@ -8,3 +8,4 @@ train LinearRegression and svm.SVR model on stock price
 # R^2 theory to reach better fit
 # Classification
 # K Nearest neighbors approach
+Using sklearn versus myown algorithm

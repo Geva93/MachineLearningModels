@@ -10,3 +10,4 @@ Building Machine learning models from scratch
 Using sklearn versus myown algorithm
 #Support vector machine
 # Kernel
+# Clustering ( K-means)

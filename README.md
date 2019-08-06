@@ -9,3 +9,4 @@ Building Machine learning models from scratch
 # K Nearest neighbors approach
 Using sklearn versus myown algorithm
 #Support vector machine
+# Kernel

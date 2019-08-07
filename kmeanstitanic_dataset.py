@@ -33,6 +33,7 @@ df = handle_non_numerical_data(df)
 #print(df.head())
 
 X = np.array(df.drop(['survived'],1).astype(float))
+X = preprocessing.scale(X)
 y = np.array(df['survived'])
 
 clf = KMeans(n_clusters = 2)

@@ -11,3 +11,7 @@ Using sklearn versus myown algorithm
 #Support vector machine
 # Kernel
 # Clustering ( K-means)
+# Soft kmeans
+# Neural network
+# Tensorflow
+# Python virtual env

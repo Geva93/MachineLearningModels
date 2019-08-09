@@ -14,4 +14,4 @@ Using sklearn versus myown algorithm
 # Soft kmeans
 # Neural network
 # Tensorflow
-# Python virtual env
+# Python virtual envi

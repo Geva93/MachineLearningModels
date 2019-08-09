@@ -15,3 +15,6 @@ Using sklearn versus myown algorithm
 # Neural network
 # Tensorflow
 # Python virtual envi
+
+#Main learning source:
+https://pythonprogramming.net
